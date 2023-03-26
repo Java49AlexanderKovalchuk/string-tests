@@ -8,69 +8,74 @@ class StringTests {
 
 	@Test
 	void testCharAt() {
-		String checkString = "Bamby";
-		assertTrue(checkString.charAt(0) == 'B');
-		assertTrue(checkString.charAt(checkString.length() - 1) == 'y');
+		assertEquals('B', "Bamby".charAt(0));
+		assertEquals(66, "Bamby".charAt(0));
+		assertEquals('y', "Bamby".charAt("Bamby".length() - 1));
 	}
+	
 	
 	@Test 
 	void testCompareTo() {
-		String checkString1 = "Hello";
-		String checkString2 = "Hello";
-		String checkString3 = "Hell";
-		assertTrue(checkString1.compareTo(checkString2) == 0);
-		assertTrue(checkString1.compareTo(checkString3) ==
-			checkString1.length() - checkString3.length());
+		assertEquals(0, "Hello".compareTo("Hello"));
+		assertTrue("Hello".compareTo("Hell") > 0);
+		assertTrue("Hell".compareTo("Hello") < 0);
+		assertEquals(8, "9".compareTo("12345"));
+		assertEquals('h' - 'H', "hello".compareTo("Hello"));
 	}
 	
 	@Test
 	void testCompareToIgnoreCase() {
-		String str1 = "JOHN";
-		String str2 = "john";
-		assertTrue(str1.compareToIgnoreCase(str2) == 0);
-		assertFalse(str1.compareToIgnoreCase(str2) > 0);
+		assertEquals(0, "John".compareToIgnoreCase("jOhN"));
+		assertTrue("John".compareToIgnoreCase("Johny") != 0);
+		assertEquals(0, "john".compareToIgnoreCase("john"));
 	}
 	
 	@Test
 	void testConcat() {
-		String str1 = "blue";
-		String str2 = "ball";
-		assertTrue(str1.concat(str2).compareTo("blueball") == 0);
-	}
+		assertEquals("football", "foot".concat("ball"));
+		assertEquals("football", "".concat("football"));
+		assertEquals("football", "football".concat(""));
+		}
 	
 	@Test
 	void testStartWith() {
-		String checkStr = "elephant";
-		assertTrue(checkStr.startsWith("elep"));
-		assertFalse(checkStr.startsWith("n"));
+		assertTrue("elephant".startsWith("el"));
+		assertTrue("elephant".startsWith(""));
+		assertFalse("elephant".startsWith("El"));
 	}
 	
 	@Test
 	void testEndsWith() {
-		String checkStr = "elephant";
-		assertTrue(checkStr.endsWith("ant"));
-		assertFalse(checkStr.endsWith("anT"));
+		assertTrue("elephant".endsWith("ant"));
+		assertFalse("elephant".endsWith("anT"));
+		assertTrue("elephant".endsWith(""));
 	}
 	
 	@Test
 	void testContains() {
-		String checkStr = "morning";
-		assertTrue(checkStr.contains("orn"));
-		assertFalse(checkStr.contains("ern"));
+		assertTrue("morning".contains("morn"));
+		assertTrue("morning".contains("ing"));
+		assertTrue("morning".contains("orn"));
+		assertFalse("morning".contains("ern"));
+		assertFalse("morning".contains("Orn"));
+
 	}
 	
 	@Test
 	void testIndexOf() {
-		String checkStr = "earth air fire";
-		assertEquals(6, checkStr.indexOf("air"));
-		assertTrue(checkStr.indexOf("water") == -1);
+		assertEquals(6, "earth air fire".indexOf("air"));
+		assertEquals(-1, "earth air fire".indexOf("water"));
+		assertEquals(0, "earth air fire".indexOf(""));
 	}
 	
 	@Test
 	void testLastIndexOf() {
-		String checkStr = "telescope";
-		assertEquals(checkStr.length() - 1, checkStr.lastIndexOf(101));
-		assertTrue(checkStr.lastIndexOf('e') == checkStr.length() - 1);		
+		assertEquals(4, "telescope".lastIndexOf("scope"));
+		assertEquals(8, "telescope".lastIndexOf("e"));		
+		assertEquals(8, "telescope".lastIndexOf('e'));	
+		assertEquals(8, "telescope".lastIndexOf(101));	
+		assertEquals(9, "telescope".lastIndexOf(""));	
+		assertEquals(-1, "telescope".lastIndexOf("w"));
 	}
 
 }
